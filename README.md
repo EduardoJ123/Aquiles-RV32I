@@ -1,1 +1,1 @@
-# Gorgon-I: 8-bit implementation of RISC microprocessor
+# Aquiles 32-bit RiscV Microprocessor
