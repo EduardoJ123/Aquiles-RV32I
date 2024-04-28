@@ -3,6 +3,9 @@ NC = '\033[0m'
 create_output:
 	@[ -d output ] || mkdir -p output
 
+create_results:
+	@[ -d test_results ] || mkdir -p test_results
+
 verilate: create_output rtl/alu.v
 	@/home/eduardo/repos/verilator/bin/verilator -cc rtl/alu.v > output/verilate.log
 	@echo -e verilate stage ----- ${GREEN}PASS${NC}
@@ -15,11 +18,11 @@ compile: create_output obj_dir/Valu.mk
 	@make -C obj_dir -f Valu.mk Valu > output/compile.log
 	@echo -e compile stage ------ ${GREEN}PASS${NC}
 
-simulate: create_output obj_dir/Valu
+simulate: create_output create_results obj_dir/Valu
 	@./obj_dir/Valu > output/simulate.log
 	@echo -e simulate stage ----- ${GREEN}PASS${NC}
 
 clean:
-	rm -rf output obj_dir waveform.vcd
+	rm -rf output obj_dir test_results
 
 aquilesv: verilate build compile simulate
