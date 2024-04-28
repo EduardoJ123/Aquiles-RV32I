@@ -1,15 +1,23 @@
+/*
+*   AquilesV
+*   Testbench top
+*/
 #include <stdlib.h>
 #include <iostream>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 #include "Valu.h"
 #include "Valu___024unit.h"
+//Tests suites
+#include "test_suite_1.cpp"
 
 #define MAX_SIM_TIME 20
 vluint64_t sim_time = 0;
 
 int main(int argc, char** argv, char** env) {
     Valu *dut = new Valu;
+
+    test_suite_1();
 
     Verilated::traceEverOn(true);
     VerilatedVcdC *m_trace = new VerilatedVcdC;
